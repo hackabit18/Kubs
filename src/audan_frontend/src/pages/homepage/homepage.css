@@ -1,0 +1,16 @@
+.search-container.jumbotron {
+    text-align: center;
+    background-image: url('../../assets/bg-search.jpg');
+    background-size: cover;
+    background-color: #22272c;
+    color: #fff;
+    border-radius: 0;
+    margin-bottom: 0;
+    padding: 40px 0;
+    border-bottom-left-radius: 50% 20%;
+    border-bottom-right-radius: 50% 20%;
+  }
+  
+  .search-container h1, .search-container p {
+    font-weight: 200;
+  }
