@@ -14,3 +14,16 @@
   .search-container h1, .search-container p {
     font-weight: 200;
   }
+
+  header .navbar-light .navbar-nav .nav-link {
+    margin: 0 3px;
+    color: rgba(0, 0, 0, 0.7);
+  }
+    
+  .header img {
+    height: 50px;
+  }
+  
+  .navbar-expand-sm .navbar-collapse {
+    justify-content: right;
+  }
