@@ -40,9 +40,15 @@ class UploadPost extends React.Component {
           if(err) {
             console.log(err)
           }
-          if(res.body.success) {
-            this.setState({loading: true})
+          try {
+            if(res && res.body.success) {
+              this.setState({loading: true})
+            }
           }
+          catch(err) {
+            console.log(err)
+          }
+
       })
       this.setState({files});
   }
@@ -78,7 +84,7 @@ class UploadPost extends React.Component {
             {this.state.uploading ?
               (
                 <div>
-                  <div className="text-center">File Upload {`${this.state.progress}`} </div>
+                  <div className="text-center">File Upload: {`${this.state.progress}`} </div>
                   <Progress value={this.state.progress.substring(0, this.state.progress.length - 1)} />
                 </div> )
               : null

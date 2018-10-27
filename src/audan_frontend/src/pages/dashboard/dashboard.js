@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Jumbotron } from 'reactstrap';
+import Plots from '../../components/plots/plots'
 import './dashboard.css';
 
 export default class Dashboard extends Component {
@@ -21,7 +22,7 @@ export default class Dashboard extends Component {
   render() {
     return (
       <div>
-        <div className='header'>
+        <div className='header-dashboard'>
           <Navbar color="faded" light toggleable>
             <NavbarToggler right="true" onClick={this.toggle} />
             <NavbarBrand href="/">
@@ -30,36 +31,34 @@ export default class Dashboard extends Component {
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="p-2" navbar>
                 <NavItem>
-                  <NavLink href="/aclakg">Home</NavLink>
+                  <NavLink href="/">Home</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/aclakg/search">Search</NavLink>
+                  <NavLink href="/team">The Team</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/aclakg/team">The Team</NavLink>
+                  <NavLink href="/contact">Contact Us</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/aclakg/contact">Contact Us</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink href="/aclakg/about">About Us</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink href="/aclakg/api">API</NavLink>
+                  <NavLink href="/about">About Us</NavLink>
                 </NavItem>
               </Nav>
             </Collapse>
           </Navbar>
         </div>
-        <Jumbotron className="search-container">
-          <h1 className="display-5">Your Video Report</h1>
+        <Jumbotron className="jumbodash">
+          <h1 className="display-5">Your Report is Available</h1>
           <p className="lead">
-            We have analyzed your video etc.etc.
+            Below is a detailed analysis about the reactions and emotions of
+            your audience during your speech
            </p>
-          <div>
-              <p>Some content to be added here</p>
-          </div>
         </Jumbotron>
+        {this.props.location.state ?
+          <Plots data={this.props.location.state.data}/>
+        :
+          <p style={{textAlign: 'center', padding: '10px'}}>Uh Oh! Try again from the homepage</p>
+        }
+
       </div>
     );
   }
