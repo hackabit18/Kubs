@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Upload from '../../components/upload/upload';
+import About from '../../components/about';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Jumbotron } from 'reactstrap';
 import './homepage.css';
 
@@ -19,9 +20,18 @@ export default class Homepage extends Component {
     });
   }
 
+  componentDidMount() {
+    document.querySelector('.bgvid').play();
+  }
+
   render() {
     return (
       <div className='home-jumbo'>
+        <div className='video-overlay'></div>
+        <video className="bgvid" playsinline autoplay muted loop>
+          {/* <source src="http://thenewcode.com/assets/videos/polina.webm" type="video/webm"/> */}
+          <source src={require('../../assets/bg.mp4')} type="video/mp4"/>
+        </video>
         <div className='header'>
           <Navbar color="faded" light toggleable>
             <NavbarToggler right="true" onClick={this.toggle} />
@@ -47,14 +57,12 @@ export default class Homepage extends Component {
           </Navbar>
         </div>
         <Jumbotron className="search-container">
-          <h1 className="display-5">AUDience ANalysis</h1>
+          <h1 className="display-5"><b>AUD</b>ience <b>AN</b>alysis</h1>
           <p className="lead">
-            A Fully Automated platform to analyze your audience
+            An intelligent platform to analyze your audience
            </p>
-          <div>
-              <p>Some content to be added here</p>
-          </div>
         </Jumbotron>
+        <About />
         <Upload />
       </div>
     );

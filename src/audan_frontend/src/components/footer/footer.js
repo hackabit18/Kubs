@@ -4,7 +4,7 @@ import './footer.css';
 
 const Footer = () => {
   return (
-      <div className="footer p-5">
+      <div className="footer p-3">
         {/* <a className="logo" href="http://www.cnergres.iitkgp.ac.in/aclakg/">
           <img src={footerLogo} alt="Logo"/>
         </a> */}
