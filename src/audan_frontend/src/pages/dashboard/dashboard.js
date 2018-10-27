@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import Upload from '../../components/upload/upload';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Jumbotron } from 'reactstrap';
-import './homepage.css';
+import './dashboard.css';
 
-export default class Homepage extends Component {
+export default class Dashboard extends Component {
 
   constructor(props) {
     super(props);
@@ -53,15 +52,14 @@ export default class Homepage extends Component {
           </Navbar>
         </div>
         <Jumbotron className="search-container">
-          <h1 className="display-5">AUDience ANalysis</h1>
+          <h1 className="display-5">Your Video Report</h1>
           <p className="lead">
-            A Fully Automated platform to analyze your audience
+            We have analyzed your video etc.etc.
            </p>
           <div>
               <p>Some content to be added here</p>
           </div>
         </Jumbotron>
-        <Upload />
       </div>
     );
   }
