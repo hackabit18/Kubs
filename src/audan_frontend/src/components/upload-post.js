@@ -44,25 +44,37 @@ class UploadPost extends React.Component {
 
   render() {
     return (
-      <section style={{marginLeft: '250px', marginTop: '100px'}}>
-        <div className="dropzone" >
-          <Dropzone multiple={false} accept='video/*' onDrop={this.onDrop.bind(this)}>
-            <p>Drop a video here, or click to select video to upload.</p>
-          </Dropzone>
-        </div>
-        <aside>
-          <h2>Dropped files</h2>
-          <ul>
-            {
-              this.state.files.map((f, ind) => <li key={ind}>{f.name} - {f.size} bytes</li>)
-            }
-          </ul>
-        </aside>
-        <div className="text-center">{`${this.state.progress}`}</div>
-        {this.state.uploading ? <Progress value={this.state.progress} /> : null}
-      </section>
+      <div className="dropzone">
+          <h2 className="upload_name">Upload your video here</h2>
+
+          <div>
+            <Dropzone className="dropzone_component"  multiple={false} accept='video/*' onDrop={this.onDrop.bind(this)}>
+              <p>Drop a video here, or click to select video to upload.</p>
+            </Dropzone>
+          </div>
+
+          <div>
+          {this.state.uploading ? 
+            <h5 style={{"padding": "5%"}} >Dropped files</h5> : null }
+            <ul>
+              {
+                this.state.files.map((f, ind) => <li key={ind}>{f.name} - {f.size} bytes</li>)
+              }
+            </ul>
+          </div>
+
+          
+          {this.state.uploading ? 
+            (
+              <div>
+                <div className="text-center">{`${this.state.progress}`} </div>
+                <Progress value={this.state.progress} /> 
+              </div> )
+            : null
+          }
+      </div>
     );
   }
 }
 
-export default UploadPost
+export default UploadPost;
