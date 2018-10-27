@@ -3,7 +3,7 @@
     background-position-y: -250px;
     text-align: center;
   }
-  
+
  .stats h1 {
     font-size: 3.2em;
     font-weight: 600
@@ -30,4 +30,8 @@
 	padding: 10px 20px;
 	width: 1000px;
 
+}
+
+.progress {
+    width: 200px;
 }

@@ -24,7 +24,7 @@ class UploadPost extends React.Component {
   onDrop(files) {
     this.setState({uploading: true})
     Request.post('/upload_video')
-    //   .type('form') 
+    //   .type('form')
       .attach('file', files[0])
     //   .send(files[0])
       .on('progress', function(e) {
@@ -54,7 +54,7 @@ class UploadPost extends React.Component {
           </div>
 
           <div>
-          {this.state.uploading ? 
+          {this.state.uploading ?
             <h5 style={{"padding": "5%"}} >Dropped files</h5> : null }
             <ul>
               {
@@ -63,12 +63,12 @@ class UploadPost extends React.Component {
             </ul>
           </div>
 
-          
-          {this.state.uploading ? 
+
+          {this.state.uploading ?
             (
               <div>
                 <div className="text-center">{`${this.state.progress}`} </div>
-                <Progress value={this.state.progress} /> 
+                <Progress value={this.state.progress.substring(0, this.state.progress.length - 1)} />
               </div> )
             : null
           }
