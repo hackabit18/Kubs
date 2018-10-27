@@ -3,8 +3,10 @@ import os
 import requests
 import json
 from flask_socketio import SocketIO, emit
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 socketio = SocketIO(app)
 
 
@@ -23,17 +25,21 @@ def upload():
 
 		# results = analyse(video)
 		video.close()
-		return ("ok", 200, {'Access-Control-Allow-Origin': '*'})
+		socketio.start_background_task(test_message)	
+		return (jsonify({"success" : True }), 200, {'Access-Control-Allow-Origin': '*'})
 	except Exception as e:
 		print(request)
 		print(e)
-		return "not ok"
+		return (jsonify({"success" : False }), 500, {'Access-Control-Allow-Origin': '*'})
 
+import json
 
 def test_message():
-	for i in range(10):
-		socketio.emit('myevent', 'somedata')
-		socketio.sleep(2)
+	data = {"z":[[8.83,8.89,8.81,8.87,8.9,8.87],[8.89,8.94,8.85,8.94,8.96,8.92],[8.84,8.9,8.82,8.92,8.93,8.91],[8.79,8.85,8.79,8.9,8.94,8.92],[8.79,8.88,8.81,8.9,8.95,8.92],[8.8,8.82,8.78,8.91,8.94,8.92],[8.75,8.78,8.77,8.91,8.95,8.92],[8.8,8.8,8.77,8.91,8.95,8.94],[8.74,8.81,8.76,8.93,8.98,8.99],[8.89,8.99,8.92,9.1,9.13,9.11],[8.97,8.97,8.91,9.09,9.11,9.11],[9.04,9.08,9.05,9.25,9.28,9.27],[9,9.01,9,9.2,9.23,9.2],[8.99,8.99,8.98,9.18,9.2,9.19],[8.93,8.97,8.97,9.18,9.2,9.18]],"type":"surface"}
+	for i in range(101):
+		socketio.emit('statusChange', {"progress" : i })
+		socketio.sleep(0.1)
+	socketio.emit('statusChange', {"data" : data })
 
 @app.route('/socket_end')   ## Heavy function goes here
 def ff():
@@ -44,4 +50,5 @@ def ff():
 if __name__ == '__main__':
 	port = int(os.environ.get("PORT", 5000))  # the app is deployed on heroku
 	# app.run(host='0.0.0.0', port=port, debug=True)
-	socketio.run(app,debug=True, host='localhost', port=8081, use_reloader=False)
+	socketio.run(app,debug=True, host='172.16.84.241', port=8081, use_reloader=False)
+
