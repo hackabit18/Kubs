@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Container, Row, Col} from 'reactstrap';
+import {Container, Row} from 'reactstrap';
 import UploadPost from '../upload-post';
 import './upload.css';
 
