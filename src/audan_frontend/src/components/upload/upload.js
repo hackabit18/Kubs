@@ -6,8 +6,8 @@ import './upload.css';
 export default class Upload extends Component {
   render() {
     return (
-      <Container fluid className="stats py-5">
-        <Container className="py-3">
+      <Container fluid className="stats">
+        <Container className="py-1">
           <Row>
             <UploadPost />
           </Row>

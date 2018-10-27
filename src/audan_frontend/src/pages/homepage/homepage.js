@@ -21,7 +21,7 @@ export default class Homepage extends Component {
 
   render() {
     return (
-      <div>
+      <div className='home-jumbo'>
         <div className='header'>
           <Navbar color="faded" light toggleable>
             <NavbarToggler right="true" onClick={this.toggle} />
@@ -31,22 +31,16 @@ export default class Homepage extends Component {
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="p-2" navbar>
                 <NavItem>
-                  <NavLink href="/aclakg">Home</NavLink>
+                  <NavLink href="/">Home</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/aclakg/search">Search</NavLink>
+                  <NavLink href="/team">The Team</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/aclakg/team">The Team</NavLink>
+                  <NavLink href="/contact">Contact Us</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/aclakg/contact">Contact Us</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink href="/aclakg/about">About Us</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink href="/aclakg/api">API</NavLink>
+                  <NavLink href="/about">About Us</NavLink>
                 </NavItem>
               </Nav>
             </Collapse>
