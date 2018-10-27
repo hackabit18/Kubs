@@ -9,12 +9,10 @@ const Footer = () => {
           <img src={footerLogo} alt="Logo"/>
         </a> */}
         <p>
-          CL Scholar is a fully automated analytics and search engine for
-          papers in Computational Linguistics Community. This website is developed
-          and maintained by CNeRG Research Group of IIT Kharagpur
+          Developed by Dhiraj Barnwal, Dibya Prakash Das, Rahul Vernwal, Sayan Sinha for Hack-a-Bit
           <br />
-          Copyright © <a href="http://www.iitkgp.ac.in"> IIT Kharagpur</a> and
-          <a href="http://www.cnergres.iitkgp.ac.in/"> CNERG Research Group</a>
+          {/*Copyright © <a href="http://www.iitkgp.ac.in"> IIT Kharagpur</a> and*/}
+          {/*<a href="http://www.cnergres.iitkgp.ac.in/"> CNERG Research Group</a>*/}
         </p>
       </div>
   )

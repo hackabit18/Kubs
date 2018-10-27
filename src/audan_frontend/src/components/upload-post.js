@@ -8,7 +8,7 @@ class UploadPost extends React.Component {
     super()
     this.state = {
         files: [],
-        progress: 0,
+        progress: "0%",
         uploading: false,
     }
   }
@@ -28,7 +28,10 @@ class UploadPost extends React.Component {
       .attach('file', files[0])
     //   .send(files[0])
       .on('progress', function(e) {
-        this.setState({progress: e.percent})
+        this.setState({progress: e.percent + "%"})
+      }.bind(this))
+      .on('error', function(e){
+        this.setState({progress: "Cannot connect to Server!"})
       }.bind(this))
       .end((err, res) => {
           console.log(err);
@@ -55,7 +58,7 @@ class UploadPost extends React.Component {
             }
           </ul>
         </aside>
-        <div className="text-center">{`${this.state.progress}%`}</div>
+        <div className="text-center">{`${this.state.progress}`}</div>
         {this.state.uploading ? <Progress value={this.state.progress} /> : null}
       </section>
     );

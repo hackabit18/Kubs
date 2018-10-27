@@ -24,7 +24,7 @@ export default class Homepage extends Component {
       <div>
         <div className='header'>
           <Navbar color="faded" light toggleable>
-            <NavbarToggler right onClick={this.toggle} />
+            <NavbarToggler right="true" onClick={this.toggle} />
             <NavbarBrand href="/">
               <p>AudAn</p>
             </NavbarBrand>
