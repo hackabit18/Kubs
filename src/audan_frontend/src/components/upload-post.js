@@ -2,6 +2,7 @@ import React from 'react';
 import Dropzone from 'react-dropzone';
 import Request from 'superagent';
 import { Progress } from 'reactstrap';
+import { subscribeToStatusChange } from '../socket'
 
 class UploadPost extends React.Component {
   constructor() {
@@ -10,7 +11,9 @@ class UploadPost extends React.Component {
         files: [],
         progress: "0%",
         uploading: false,
+        loading: false,
     }
+    subscribeToStatusChange((err, newstatus) => console.log(err, newstatus));
   }
 
   /*We will be using Request.post() to the send our post request
