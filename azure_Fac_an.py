@@ -6,6 +6,7 @@ from io import BytesIO
 from PIL import Image
 import cv2
 import os
+from copy import copy
 # import util
 
 headers = {
@@ -30,6 +31,7 @@ fwidth = 1280
 fheight = 544
 fourcc = cv2.VideoWriter_fourcc(*'XVID')
 out = cv2.VideoWriter('output.avi',fourcc, 5.0, (fwidth,fheight))
+out_wo_rect = cv2.VideoWriter('output_wo_rect.avi',fourcc, 5.0, (fwidth,fheight))
 
 f_no = 1
 ratio = 4
@@ -41,6 +43,7 @@ with open('data.json', 'w') as fp:
 
 while(cap.isOpened()):
     ret, frame = cap.read()
+    frame_cp = copy(frame)
     # print(frame.shape)
     print("frame = ", f_no)
     f_no += 1
@@ -65,6 +68,7 @@ while(cap.isOpened()):
             # frame = cv2.flip(frame,0)
             for i in range(ratio):
                 out.write(frame)
+                out_wo_rect.write(frame_cp)
                 save_dict[f_no+i] = analysis
             cv2.waitKey(1)
         else:
