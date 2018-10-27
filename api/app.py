@@ -3,13 +3,10 @@ import os
 import requests
 import json
 from flask_socketio import SocketIO, emit
-from multiprocessing import Pool
 
 app = Flask(__name__)
 socketio = SocketIO(app)
 
-
-pool = Pool(processes=2)
 
 @app.route('/')
 def root():
@@ -35,17 +32,16 @@ def upload():
 
 def test_message():
 	for i in range(10):
-		emit('my response', {'data': 'got it!'})
+		socketio.emit('myevent', 'somedata')
 		socketio.sleep(2)
 
-@app.route('/socket_end')
+@app.route('/socket_end')   ## Heavy function goes here
 def ff():
-	i = pool.apply_async(test_message)
-	return "ok"
-    
+	socketio.start_background_task(test_message)
+	return "ok"   
 
 
 if __name__ == '__main__':
 	port = int(os.environ.get("PORT", 5000))  # the app is deployed on heroku
 	# app.run(host='0.0.0.0', port=port, debug=True)
-	socketio.run(app,debug=True, host='10.42.0.112', port=8080, use_reloader=False)
+	socketio.run(app,debug=True, host='localhost', port=8081, use_reloader=False)
