@@ -13,6 +13,7 @@ class PreLoader extends Component {
     }
 
     subscribeToStatusChange((err, newval) => {
+      console.log(newval)
       if(newval.progress) {
         this.setState({prog: newval.progress})
       }
@@ -43,7 +44,7 @@ class PreLoader extends Component {
         <div>Please wait while our minions analyze your video</div>
         <div>This may take a while</div>
         <div><h2>Processing...</h2></div>
-        <div><h3>{this.state.prog}%</h3></div>
+        <div><h3>{Math.round(this.state.prog)}%</h3></div>
       </div>
     )
   }

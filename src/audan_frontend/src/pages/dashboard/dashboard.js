@@ -53,6 +53,9 @@ export default class Dashboard extends Component {
             your audience during your speech
            </p>
         </Jumbotron>
+        {/* <Plots /> */}
+
+        {/* Final deployment */}
         {this.props.location.state ?
           <Plots data={this.props.location.state.data}/>
         :
