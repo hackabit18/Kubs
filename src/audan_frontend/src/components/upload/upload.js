@@ -9,8 +9,7 @@ export default class Upload extends Component {
       <Container fluid className="stats py-5">
         <Container className="py-3">
           <Row>
-              <h3>Upload your video here</h3>
-              <UploadPost />
+            <UploadPost />
           </Row>
         </Container>
       </Container>
