@@ -2,7 +2,8 @@ import React from 'react';
 import Dropzone from 'react-dropzone';
 import Request from 'superagent';
 import { Progress } from 'reactstrap';
-import { subscribeToStatusChange } from '../socket'
+
+import PreLoader from './preloader/preloader';
 
 class UploadPost extends React.Component {
   constructor() {
@@ -13,7 +14,6 @@ class UploadPost extends React.Component {
         uploading: false,
         loading: false,
     }
-    subscribeToStatusChange((err, newstatus) => console.log(err, newstatus));
   }
 
   /*We will be using Request.post() to the send our post request
@@ -37,44 +37,54 @@ class UploadPost extends React.Component {
         this.setState({progress: "Cannot connect to Server!"})
       }.bind(this))
       .end((err, res) => {
-          console.log(err);
-          console.log(res);
+          if(err) {
+            console.log(err)
+          }
+          if(res.body.success) {
+            this.setState({loading: true})
+          }
       })
-    this.setState({
-      files
-    });
+      this.setState({files});
   }
 
   render() {
     return (
       <div className="dropzone">
-          <h2 className="upload_name">Upload your video here</h2>
 
+        { this.state.loading ?
+          <PreLoader />
+          :
+          (
           <div>
-            <Dropzone className="dropzone_component"  multiple={false} accept='video/*' onDrop={this.onDrop.bind(this)}>
-              <p>Drop a video here, or click to select video to upload.</p>
-            </Dropzone>
+            <h2 className="upload_name">Upload your video here</h2>
+
+            <div>
+              <Dropzone className="dropzone_component"  multiple={false} accept='video/*' onDrop={this.onDrop.bind(this)}>
+                <p>Drop a video here, or click to select video to upload.</p>
+              </Dropzone>
+            </div>
+
+            <div>
+            {this.state.uploading ?
+              <h5 style={{"padding": "5%"}} >Dropped files</h5> : null }
+              <ul>
+                {
+                  this.state.files.map((f, ind) => <li key={ind}>{f.name} - {f.size} bytes</li>)
+                }
+              </ul>
+            </div>
+
+
+            {this.state.uploading ?
+              (
+                <div>
+                  <div className="text-center">File Upload {`${this.state.progress}`} </div>
+                  <Progress value={this.state.progress.substring(0, this.state.progress.length - 1)} />
+                </div> )
+              : null
+            }
           </div>
-
-          <div>
-          {this.state.uploading ?
-            <h5 style={{"padding": "5%"}} >Dropped files</h5> : null }
-            <ul>
-              {
-                this.state.files.map((f, ind) => <li key={ind}>{f.name} - {f.size} bytes</li>)
-              }
-            </ul>
-          </div>
-
-
-          {this.state.uploading ?
-            (
-              <div>
-                <div className="text-center">{`${this.state.progress}`} </div>
-                <Progress value={this.state.progress.substring(0, this.state.progress.length - 1)} />
-              </div> )
-            : null
-          }
+          )}
       </div>
     );
   }

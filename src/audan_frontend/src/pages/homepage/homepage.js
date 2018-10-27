@@ -31,16 +31,16 @@ export default class Homepage extends Component {
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="p-2" navbar>
                 <NavItem>
-                  <NavLink href="/aclakg">Home</NavLink>
+                  <NavLink href="/">Home</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/aclakg/team">The Team</NavLink>
+                  <NavLink href="/team">The Team</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/aclakg/contact">Contact Us</NavLink>
+                  <NavLink href="/contact">Contact Us</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="/aclakg/about">About Us</NavLink>
+                  <NavLink href="/about">About Us</NavLink>
                 </NavItem>
               </Nav>
             </Collapse>
