@@ -1,5 +1,7 @@
 import json
+from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import pyplot as plt
+import numpy as np
 
 with open('data_boring.json', 'r') as fp:
     data = json.load(fp)
@@ -33,4 +35,5 @@ for fr in sorted(f_no):
 plt.plot(f_no, happiness, color ='green', linewidth = 2)
 plt.plot(f_no, sadness, color = 'red', linewidth = 2)
 plt.plot(f_no, surprise, color = 'blue', linewidth = 2)
+
 plt.show()

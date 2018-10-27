@@ -5,11 +5,12 @@ from matplotlib.patches import Rectangle
 from io import BytesIO
 from PIL import Image
 import cv2
+import os
 # import util
 
 headers = {
     # Request headers
-    'Ocp-Apim-Subscription-Key': '50c24fee73934ac28749c3bbc131dac1',
+    'Ocp-Apim-Subscription-Key': os.getenv("KEY"),
     'Content-Type': 'application/octet-stream'
 }
 
@@ -22,8 +23,8 @@ params = {
 
 url = "https://centralindia.api.cognitive.microsoft.com/face/v1.0/detect";
 
-cap = cv2.VideoCapture('movie/interesting.mp4')
-addr = "test_images/image.png"
+cap = cv2.VideoCapture('/home/ss/Videos/interesting.mp4')
+# addr = "test_images/image.png"
 
 fwidth = 1280
 fheight = 544
