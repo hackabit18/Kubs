@@ -20,7 +20,7 @@ export default class Header extends Component {
   render() {
     return (
       <div className='header'>
-        <Navbar color="faded" light toggleable>
+        <Navbar color="faded" light expand>
           <NavbarToggler right onClick={this.toggle} />
           <NavbarBrand href="/">
             <p>AudAn</p>

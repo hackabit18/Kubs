@@ -20,15 +20,11 @@ export default class Homepage extends Component {
     });
   }
 
-  componentDidMount() {
-    document.querySelector('.bgvid').play();
-  }
-
   render() {
     return (
       <div className='home-jumbo'>
         <div className='video-overlay'></div>
-        <video className="bgvid" playsinline autoplay muted loop>
+        <video className="bgvid" autoPlay muted loop>
           {/* <source src="http://thenewcode.com/assets/videos/polina.webm" type="video/webm"/> */}
           <source src={require('../../assets/bg.mp4')} type="video/mp4"/>
         </video>

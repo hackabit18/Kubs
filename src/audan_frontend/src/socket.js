@@ -1,5 +1,5 @@
 import openSocket from 'socket.io-client';
-const socket = openSocket('http://172.16.84.241:8081');
+const socket = openSocket('http://10.42.0.231:8081/');
 
 function subscribeToStatusChange(cb) {
    socket.on('statusChange', status => cb(null, status));
