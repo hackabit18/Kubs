@@ -3,7 +3,7 @@ from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import pyplot as plt
 import numpy as np
 
-with open('data_boring.json', 'r') as fp:
+with open('data.json', 'r') as fp:
     data = json.load(fp)
 
 f_no = []

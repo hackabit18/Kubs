@@ -24,14 +24,14 @@ params = {
 
 url = "https://centralindia.api.cognitive.microsoft.com/face/v1.0/detect";
 
-cap = cv2.VideoCapture('/home/ss/Videos/interesting.mp4')
+cap = cv2.VideoCapture('video.mp4')
 # addr = "test_images/image.png"
 
 fwidth = 1280
 fheight = 544
 fourcc = cv2.VideoWriter_fourcc(*'XVID')
-out = cv2.VideoWriter('output.avi',fourcc, 5.0, (fwidth,fheight))
-out_wo_rect = cv2.VideoWriter('output_wo_rect.avi',fourcc, 5.0, (fwidth,fheight))
+out = cv2.VideoWriter('output_now.avi',fourcc, 5.0, (fwidth,fheight))
+out_wo_rect = cv2.VideoWriter('output_now_wo_rect.avi',fourcc, 5.0, (fwidth,fheight))
 
 f_no = 1
 ratio = 4
@@ -41,11 +41,17 @@ import json
 with open('data.json', 'w') as fp:
     json.dump(save_dict, fp)
 
+length = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+
 while(cap.isOpened()):
     ret, frame = cap.read()
     frame_cp = copy(frame)
     # print(frame.shape)
     print("frame = ", f_no)
+    f = open("frames_read.txt", "w")
+    f.write(str(f_no)+"\n")
+    f.write(str(length)+"\n")
+    f.close()
     f_no += 1
     if(f_no%ratio!=0):
         continue
@@ -83,3 +89,5 @@ cv2.destroyAllWindows()
 import json
 with open('data.json', 'w') as fp:
     json.dump(save_dict, fp)
+
+
