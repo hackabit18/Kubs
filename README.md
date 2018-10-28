@@ -3,7 +3,9 @@
 ## Idea
 
 Theme *-* ***AI in Educational Discourse***
+
 Problem Statement
+
 Are tests, viva or examinations sufficient to evaluate a classroom? Limitations with present teaching-learning process :
 
 - Difficult to find root of the problem as these reports just present general picture.
@@ -17,9 +19,11 @@ The idea is to enhance the teaching-learning process and make it more personaliz
 - Could be helpful in finding one’s interests.
 
 Approach
+
 Our approach is to use existing face & emotion detectors, like Azure’s Vision API or Google Cloud Vision API, to detect collective emotion of an audience to use as a quantitative measure of their response towards the discourse.  With this information at hand, a number of accurate inferences can be made and actions can be taken to improve if the audience is losing interest. No new hardware is needed because good cameras already exists in classrooms, talks, and presentation that focuses on the audience and can be readily integrated with our system to generate analysis reports. An extended analysis also lets one see each of the detected person’s age & emotion.
 
 *Why emotions?*
+
 Facial emotions play an important role in everyday interaction of people with others. Late Psychology research has demonstrated that the people express their feelings fundamentally through outward appearances.
 
 
