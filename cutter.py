@@ -18,15 +18,13 @@ CF.BaseUrl.set(BASE_URL)
 
 f = open("data.json", "r")
 
-video_capture = cv2.VideoCapture("output_wo_rect.avi")
+video_capture = cv2.VideoCapture("output_now_wo_rect.avi")
 bgr_image = video_capture.read()[1]
 
 data = json.load(f)
 os.system("rm faces/*")
 # print(data)
 
-f_ = open('temp.json', 'r')
-parsed = json.load(f_)
 
 count = 1
 for face in data["4"]:
@@ -35,16 +33,21 @@ for face in data["4"]:
     crop_img = bgr_image[rectDict["top"]:rectDict["top"]+rectDict["height"], rectDict["left"]:rectDict["left"]+rectDict["width"]]
     cv2.imwrite("faces/"+str(count)+".png", crop_img)
 
-    os.system("python track.py face_"+str(count)+" faces/"+str(count)+".png")
+    os.system("python ../track.py face_"+str(count)+" faces/"+str(count)+".png")
     count+=1
 
+f_ = open('temp.json', 'r')
+parsed = json.load(f_)
 print "\n\n-----------\nStarting read:\n\n-----------"
 counter = 2
 
 person_wise_emotions = {}
 length = int(video_capture.get(cv2.CAP_PROP_FRAME_COUNT))
-
+# countcount = 1
 while True:
+    # if countcount == 3:
+        # break
+    # countcount+=1
     ret, bgr_image = video_capture.read()
     if not ret:
         break
@@ -61,32 +64,35 @@ while True:
     # drawhere = ImageDraw.Draw(draw)
     cv2.imwrite("temp.jpg", bgr_image)
     # draw = ImageDraw.Draw(img)
-    array = CF.face.detect("temp.jpg", attributes="emotion,age")
-    flag = False
-    for face in array:
-        print face
-        k = CF.face.identify([face['faceId']], "kubss")
-        # for face in array:
-        #     drawhere.rectangle(getRectangleTuple(face), outline='red')
-        try:
-            print("k: ", k)
-            print("Found: " + parsed[k[0]['candidates'][0]['personId']])
-            if parsed[k[0]['candidates'][0]['personId']] in person_wise_emotions:
-                person_wise_emotions[parsed[k[0]['candidates'][0]['personId']]]["surprised"].append(face["faceAttributes"]["emotion"]["surprise"])
-                person_wise_emotions[parsed[k[0]['candidates'][0]['personId']]]["sadness"].append(face["faceAttributes"]["emotion"]["sadness"])
-                person_wise_emotions[parsed[k[0]['candidates'][0]['personId']]]["age"].append(face["faceAttributes"]["age"])
-            else:
-                person_wise_emotions[k[0]['candidates'][0]['personId']] = {}
-                person_wise_emotions[k[0]['candidates'][0]['personId']]["surprised"] = []
-                person_wise_emotions[k[0]['candidates'][0]['personId']]["sadness"] = []
-                person_wise_emotions[k[0]['candidates'][0]['personId']]["age"] = []
-            # tuplehere = getRectangleTuple(face)
-            # drawhere.rectangle(tuplehere, outline='green')
-            # drawhere.text(tuplehere[0], parsed[k[0]['candidates'][0]['personId']])
-        except:
-            print("No faces found.")
+    try:
+        array = CF.face.detect("temp.jpg", attributes="emotion,age")
+        flag = False
+        for face in array:
+            print face
+            k = CF.face.identify([face['faceId']], "kubss")
+            # for face in array:
+            #     drawhere.rectangle(getRectangleTuple(face), outline='red')
+            try:
+                print("k: ", k)
+                print("Found: " + parsed[k[0]['candidates'][0]['personId']])
+                if parsed[k[0]['candidates'][0]['personId']] in person_wise_emotions:
+                    person_wise_emotions[parsed[k[0]['candidates'][0]['personId']]]["surprised"].append(face["faceAttributes"]["emotion"]["surprise"])
+                    person_wise_emotions[parsed[k[0]['candidates'][0]['personId']]]["sadness"].append(face["faceAttributes"]["emotion"]["sadness"])
+                    person_wise_emotions[parsed[k[0]['candidates'][0]['personId']]]["age"].append(face["faceAttributes"]["age"])
+                else:
+                    person_wise_emotions[parsed[k[0]['candidates'][0]['personId']]] = {}
+                    person_wise_emotions[parsed[k[0]['candidates'][0]['personId']]]["surprised"] = []
+                    person_wise_emotions[parsed[k[0]['candidates'][0]['personId']]]["sadness"] = []
+                    person_wise_emotions[parsed[k[0]['candidates'][0]['personId']]]["age"] = []
+                # tuplehere = getRectangleTuple(face)
+                # drawhere.rectangle(tuplehere, outline='green')
+                # drawhere.text(tuplehere[0], parsed[k[0]['candidates'][0]['personId']])
+            except:
+                print("No faces found.")
+    except:
+        break
 
-pu.db
+# pu.db
 final_persons = {}
 for person in person_wise_emotions:
     surp = sum(person_wise_emotions[person]["surprised"])
@@ -100,4 +106,7 @@ for person in person_wise_emotions:
     final_persons[person]["age"] = sum(person_wise_emotions[person]["age"])/len(person_wise_emotions[person]["age"])
 
 f = open("final_persons.json", "w")
-json.dumps(final_persons, f)
+json.dump(final_persons, f)
+f.close()
+print()
+print(final_persons)
