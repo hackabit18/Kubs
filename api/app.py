@@ -23,7 +23,7 @@ def emit_frames(socketio):
 			prog = 100.0 * curr/total
 		except:
 			prog = 0
-		if prog>=100.0 or FLAG:	
+		if prog>=95.0 or FLAG:	
 			break
 		print("Emitted")
 		print(prog)
@@ -34,6 +34,7 @@ def emit_frames(socketio):
 		socketio.sleep(0.5)
 
 def analyse(socketio):
+	FLAG = False
 	f = open("frames_read.txt","w")
 	f.write("0\n0\n")
 	f.close()
@@ -52,6 +53,23 @@ def analyse(socketio):
 @app.route('/')
 def root():
 	return jsonify({"api": "working"})
+
+
+
+@app.route('/personData',methods=['GET'])
+def upload2():
+	# FLAG = False
+	# f = open("frames_read.txt","w")
+	# f.write("0\n0\n")
+	# f.close()
+	# socketio.start_background_task(emit_frames, socketio)
+	os.system("python ../cutter.py")
+	f = open("final_persons.json", "r")
+	dict_here = f.read()
+	dict_here = json.loads(dict_here)
+	# 0socketio.emit("statusChange", {"data_here": dict_here})
+	return jsonify(dict_here)
+	
 
 
 @app.route('/upload_video',methods=['POST'])
